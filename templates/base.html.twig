@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
+        {% block stylesheets %}
+            <link rel="stylesheet" href="/assets/styles/reset.css">
+            <link rel="stylesheet" href="/assets/styles/normalize.css">
+            <link rel="stylesheet" href="/assets/styles/app.css">
+        {% endblock %}
+
+        {% block javascripts %}
+{% block importmap %}{{ importmap('app') }}{% endblock %}
+            <script src="/assets/app.js"></script>
+        {% endblock %}
+    </head>
+    <body>
+        <div class="overlay-menu-mobile" onclick="closeMenuMobile()">
+        </div>
+
+        <div class="navbar" id="admin_panel">
+            <a href="{{ path('admin') }}">Tableau de bord</a>
+            <a href="#">Menus</a>
+            <a href="#">Ajouter un article</a>
+            <a href="#">Ajouter une page</a>
+        </div>
+        <header class="header">
+            <div class="header__logo">
+                <img src="../assets/img/EN logo.png" alt="Logo des Eaux-noires" class="logo_img">
+                <a href="{{ path('app_home' )}}">
+                    <h1><i>Chronique des Eaux Noires</i></h1>
+                </a>
+
+                <ul class="connexion">
+                    <li><a href="">S'inscrire</a></li>
+                    <li><a href="">Connexion</a></li>
+                </ul>
+
+                <nav class="header__nav">
+                    <div class="header__nav__close" onclick="closeMenuMobile()">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </div>
+                    <ul class="header__nav__menu">
+                        <li class="header__nav__menu__link">
+                            <a href="">
+                                Tableau de bord
+                            </a>
+                        </li>
+
+                        <li class="header__nav__menu__link">
+                            <a href="">
+                                Menus
+                            </a>
+                        </li>
+
+                        <li class="header__nav__menu__link">
+                            <a href="">
+                            Ajouter
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+                
+                <div class="header__burger" onclick="openMenuMobile()">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
+                </div>
+            </div>
+        </header>
+
+        {% block body %}
+        
+        {% endblock %}
+
+        <footer class="footer">
+            <h5>@ {{ 'now' | date('Y') }} Ne3ko - Tous droits réservés.</h5>
+        
+            <nav>
+                <ul>
+                    <li><a href="#">Tableau de bord</a></li>
+                    <li><a href="#">Menus</a></li>
+                    <li><a href="#">Ajouter</a></li>
+                </ul>
+            </nav>
+        
+            <nav>
+                <ul class="">
+                    <li><a href="">S'inscrire</a></li>
+                    <li><a href="">Connexion</a></li>
+                </ul>
+            </nav>
+        </footer>        
+    </body>
+</html>

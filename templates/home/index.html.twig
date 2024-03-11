@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello HomeController!{% endblock %}
+
+{% block body %}
+    <main class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="static">
+                    <div class="about-section">
+                        {% include 'widget/about.html.twig' %}
+                    </div>
+                    <section class="categories-section">
+                        {% include 'widget/categories.html.twig' %}
+                    </section>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <h2>Articles récents</h2>
+                <div id="article-list">
+                    {% include 'article/list.html.twig' with { articles } %}
+                </div>
+            </div>
+        </div>
+    </main>
+{% endblock %}
