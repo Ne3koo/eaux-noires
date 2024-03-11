@@ -1,6 +1,6 @@
 {% set article_show = path('article_show', {'slug':article.slug }) %}
 <article>
-    <div class="row">
+    {# <div class="row"> #}
     <div>
         {% if article.featuredImage %}
         <a href="{{ path('article_show') }}">
@@ -9,9 +9,9 @@
     {% endif %}
     </div>
 
-    <div>
+    <div class="container">
         <h2>
-            <a href="{{ article_show }}">{{ article.title }}</a>
+            <a href="{{ article_show }}" class="article_link">{{ article.title }}</a>
         </h2>
         <p>
             {{ article.createdAt|date('d M Y') }}
@@ -19,5 +19,5 @@
         {{ article.featuredText ?: article.content|striptags|slice(0, 130) ~ '...'}}
     </div>
 
-    </div>
+    {# </div> #}
 </article>
