@@ -1,12 +1,10 @@
 <div>
     <h3>Catégories</h3>
     <ol>
-        <li>
-            <a href="">Cat 01</a>
-        </li>
-
-        <li>
-            <a href="">Cat 02</a>
-        </li>
+        {% for category in categories %}
+            <li>
+                <a href="{{ path('category_show', {slug: category.slug }) }}">{{ category.name }}</a>
+            </li>
+        {% endfor %}
     </ol>
 </div>

@@ -304,7 +304,15 @@ body {
     text-decoration: none;
     color: #000000;
 }
-
+.article-container{
+    width: 100%;
+    margin-top: 15px;
+    text-align: left;
+}
+.article_link{
+    text-decoration: none;
+    color: #000000;
+}
   /* CSS pour les écrans plus larges que 768px (tablettes et ordinateurs) */
   @media screen and (min-width: 1024px) {
     .header__nav__close svg {

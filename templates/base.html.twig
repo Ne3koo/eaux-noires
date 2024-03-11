@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
     <head>
         <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
+        <title>{% block title %}Chroniques d\'eaux noires{% endblock %}</title>
         <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
         {% block stylesheets %}
             <link rel="stylesheet" href="/assets/styles/reset.css">
@@ -11,7 +11,7 @@
         {% endblock %}
 
         {% block javascripts %}
-{% block importmap %}{{ importmap('app') }}{% endblock %}
+        {# {% block importmap %}{{ importmap('app') }}{% endblock %} #}
             <script src="/assets/app.js"></script>
         {% endblock %}
     </head>
@@ -83,7 +83,7 @@
         
             <nav>
                 <ul>
-                    <li><a href="#">Tableau de bord</a></li>
+                    <li><a href="{{ path('admin') }}">Tableau de bord</a></li>
                     <li><a href="#">Menus</a></li>
                     <li><a href="#">Ajouter</a></li>
                 </ul>
