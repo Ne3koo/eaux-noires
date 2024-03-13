@@ -313,6 +313,33 @@ body {
     text-decoration: none;
     color: #000000;
 }
+hr{
+    margin: 30px;
+}
+.container h1{
+    color: #DCB253;
+    font-size: 40px;
+    font-family: 'Audiowide', serif;
+    padding-right: 30px;
+}
+.comments_zone h2{
+    font-family: 'Audiowide', serif;
+    font-size: 36px;
+    color: #DCB253;
+    margin-bottom: 20px;
+}
+.comment_area{
+    width: 100%;
+    padding: 40px;
+    border-radius: 8px;
+}
+.comment_submit{
+    font-family: 'Average', serif;
+    font-size: 36px;
+    color: #DCB253;
+    width: 100%;
+    height: 3vh;
+}
   /* CSS pour les écrans plus larges que 768px (tablettes et ordinateurs) */
   @media screen and (min-width: 1024px) {
     .header__nav__close svg {
@@ -350,6 +377,8 @@ body {
         width: 25%;
         order: 2; 
     }
+    .comment_submit{
+        height: 10vh;
+    }
   }
-
   

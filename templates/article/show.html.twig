@@ -5,8 +5,26 @@
 {% block body %}
     <div class="container">
         <h1>{{ article.title }}</h1>
+
         <hr>
 
         {{ article.content|raw }}
+
+        <hr>
+        
+        <section class="comments_zone">
+            <h2>
+                <span id="comment-count">{{ article.comments|length }}</span> commentaire(s)
+            </h2>
+
+                {{ form(commentForm, { 'attr': {'class': 'comment-form' } }) }}
+
+                <div class="comment-list">
+                 {% for comment in article.comments %}
+                    {% include 'comment/index.html.twig' with [comment] %}
+                 {% endfor %}
+                </div>
+
+        </section>
     </div>
 {% endblock %}
