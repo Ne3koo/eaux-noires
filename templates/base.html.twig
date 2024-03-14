@@ -1,3 +1,5 @@
+{% set menus = menu_service.findAll %}
+
 <!DOCTYPE html>
 <html lang="fr">
     <head>
@@ -44,24 +46,27 @@
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
                         </svg>
                     </div>
-                    <ul class="header__nav__menu">
-                        <li class="header__nav__menu__link">
-                            <a href="">
-                                Tableau de bord
-                            </a>
-                        </li>
+                    
+                    {# dropdown à faire #}
+                    <ul class="header__nav__menu" id="dropdown>
+                        {% for menu in menus %}
+                            {% if menu.subMenus.count > 0 %}
+                                <li class="header__nav__menu__link">
+                                    <a href="{{ menu|menuLink }}">
+                                        {{ menu.name }}
+                                    </a>
+                                </li>
+                                {% for subMenu in menu.subMenus %}
+                                        <li><a class="dropdown-item" href="{{ subMenu|menuLink }}">{{ subMenu.name }}</a></li>
+                                    {% endfor %}
+                            {% else %}
+                                <li class="header__nav__menu__link">
+                                    <a href="{{ menu|menuLink }}">
+                                        {{ menu.name }}
+                                    </a>
+                            {% endif %}
+                        {% endfor %}
 
-                        <li class="header__nav__menu__link">
-                            <a href="">
-                                Menus
-                            </a>
-                        </li>
-
-                        <li class="header__nav__menu__link">
-                            <a href="">
-                            Ajouter
-                            </a>
-                        </li>
                     </ul>
                 </nav>
                 
