@@ -21,12 +21,16 @@
         <div class="overlay-menu-mobile" onclick="closeMenuMobile()">
         </div>
 
+    {% if is_granted('ROLE_AUTHOR') %}
         <div class="navbar" id="admin_panel">
+        {% if is_granted('ROLE_ADMIN') %}
             <a href="{{ path('admin') }}">Tableau de bord</a>
             <a href="#">Menus</a>
+        {% endif %}
             <a href="#">Ajouter un article</a>
             <a href="#">Ajouter une page</a>
         </div>
+    {% endif %}
         <header class="header">
             <div class="header__logo">
                 <img src="../assets/img/EN logo.png" alt="Logo des Eaux-noires" class="logo_img">
@@ -90,13 +94,19 @@
         {% endblock %}
 
         <footer class="footer">
-            <h5>@ {{ 'now' | date('Y') }} Ne3ko - Tous droits réservés.</h5>
+            <h5>@ {{ 'now' | date('Y') }} Chroniques des Eaux Noires - Tous droits réservés.</h5>
         
             <nav>
+            {% if is_granted('ROLE_AUTHOR') %}
                 <ul>
+                {% if is_granted('ROLE_ADMIN') %}
                     <li><a href="{{ path('admin') }}">Tableau de bord</a></li>
                     <li><a href="#">Menus</a></li>
+                {% endif %}
                     <li><a href="#">Ajouter</a></li>
+                    <li><a href="#">Ajouter une page</a></li>
+                {% endif %}
+                    
                 </ul>
             </nav>
         
