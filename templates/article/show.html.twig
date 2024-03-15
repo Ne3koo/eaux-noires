@@ -13,17 +13,20 @@
         <hr>
         
         <section class="comments_zone">
+            
+            {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+            {{ form(commentForm, { 'attr': {'class': 'comment-form' } }) }}
+            {% endif %}
+
             <h2>
-                <span id="comment-count">{{ article.comments|length }}</span> commentaire(s)
+            <span id="comment-count">{{ article.comments|length }}</span> commentaire(s)
             </h2>
 
-                {{ form(commentForm, { 'attr': {'class': 'comment-form' } }) }}
-
-                <div class="comment-list">
-                 {% for comment in article.comments %}
-                    {% include 'comment/index.html.twig' with [comment] %}
-                 {% endfor %}
-                </div>
+            <div class="comment-list">
+                {% for comment in article.comments %}
+                {% include 'comment/index.html.twig' with [comment] %}
+                {% endfor %}
+            </div>
 
         </section>
     </div>

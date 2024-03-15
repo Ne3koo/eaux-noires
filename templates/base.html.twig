@@ -35,8 +35,14 @@
                 </a>
 
                 <ul class="connexion">
-                    <li><a href="">S'inscrire</a></li>
-                    <li><a href="">Connexion</a></li>
+                    {% if not is_granted('IS_AUTHENTICATED_FULLY') %}
+                        <li><a href="{{ path('app_register') }}">S'inscrire</a></li>
+                        <li><a href="{{ path('app_login') }}">Connexion</a></li>
+                    
+                    {% else %}
+                        <li><a href="{{ path('user', { 'username': app.user.username }) }}">{{ app.user.username|capitalize }}</a></li>
+                        <li><a href="{{ path('app_logout') }}">Déconnexion</a></li>
+                    {% endif %}
                 </ul>
 
                 <nav class="header__nav">
@@ -48,7 +54,7 @@
                     </div>
                     
                     {# dropdown à faire #}
-                    <ul class="header__nav__menu" id="dropdown>
+                    <ul class="header__nav__menu" id="dropdown">
                         {% for menu in menus %}
                             {% if menu.subMenus.count > 0 %}
                                 <li class="header__nav__menu__link">
@@ -96,10 +102,16 @@
         
             <nav>
                 <ul class="">
-                    <li><a href="">S'inscrire</a></li>
-                    <li><a href="">Connexion</a></li>
+                    {% if not is_granted('IS_AUTHENTICATED_FULLY') %}
+                        <li><a href="{{ path('app_register') }}">S'inscrire</a></li>
+                        <li><a href="{{ path('app_login') }}">Connexion</a></li>
+                    
+                    {% else %}
+                        <li><a href="{{ path('user', { 'username': app.user.username }) }}">{{ app.user.username|capitalize }}</a></li>
+                        <li><a href="{{ path('app_logout') }}">Déconnexion</a></li>
+                    {% endif %}
                 </ul>
             </nav>
-        </footer>        
+        </footer>
     </body>
 </html>

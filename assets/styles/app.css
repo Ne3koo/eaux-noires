@@ -52,8 +52,12 @@ body {
     margin-left: 40px;
 }
 .header a{
+    transition: color 0.3s ease;
     text-decoration: none;
     color: #ffffff;
+}
+.header a:hover{
+    color: #DCB253;
 }
 .header li{
     list-style: none;
@@ -227,12 +231,13 @@ body {
     justify-content: flex-end;
 }
 
-.footer a {
+.footer nav ul li a {
     text-decoration: none;
     font-family: 'Average', serif;
     color: #ffffff;
     text-align: left;
-    padding: 25px;
+    padding-bottom: 25px;
+    transition: color 0.3s ease;
 }
 
 .footer ul {
@@ -274,7 +279,67 @@ body {
     width: 100%;
     order: 1; 
 }
+.form-control[readonly] {
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    text-align: center;
+}
+.form-label {
+    font-weight: bold;
+}
+.input-group {
+    margin-top: 25px;
+    margin-bottom: 40px;
+}
+.form-container {
+    margin: 50px auto;
+    width: 50%;
+}
+.form-group {
+    margin-bottom: 20px; /* Ajoute de l'espace entre les groupes de formulaire */
+}
 
+/* Style pour la case à cocher */
+.form-check {
+    margin-top: 10px; /* Ajoute de l'espace au-dessus de la case à cocher */
+}
+/* Style pour l'étiquette de la case à cocher */
+.form-check-label {
+    margin-left: 5px; /* Ajoute un espace à gauche de l'étiquette */
+    vertical-align: middle;
+}
+.d-flex {
+    display: flex;
+}
+.align-items-center {
+    align-items: center;
+}
+.form-control {
+    margin-right: 10px; /* Ajouter un espace entre les champs de formulaire */
+}
+/* styles.css */
+
+/* Style pour la case à cocher */
+.form-check-input {
+    width: 20px; /* Définir la largeur */
+    height: 20px; /* Définir la hauteur */
+    margin-right: 5px; /* Ajouter un espace à droite de la case à cocher */
+    vertical-align: middle; /* Aligner verticalement */
+}
+
+/* Style pour la case à cocher cochée */
+.form-check-input:checked {
+    background-color: #007bff; /* Couleur de fond lorsque cochée */
+}
+
+/* Style pour le label de la case à cocher */
+.form-check-label {
+    vertical-align: middle; /* Aligner verticalement */
+}
+
+._profil{
+    margin-bottom: 40px;
+}
 .static {
     background-color: #f8f8f8; /* Example background color */
     padding: 20px;
@@ -322,6 +387,27 @@ hr{
     font-family: 'Audiowide', serif;
     padding-right: 30px;
 }
+
+.comment {
+    margin-bottom: 20px; 
+}
+.card {
+    border-radius: 0.25rem; 
+    border: 1px solid rgba(0, 0, 0, 0.125);
+    background-color: #fff;
+}
+.card-title {
+    margin-bottom: 0.75rem;
+}
+.comment-author {
+    font-weight: bold;
+}
+.card-body {
+    padding: 1.25rem; 
+}
+.card-body small {
+    color: #6c757d; 
+}
 .comments_zone h2{
     font-family: 'Audiowide', serif;
     font-size: 36px;
@@ -339,6 +425,7 @@ hr{
     color: #DCB253;
     width: 100%;
     height: 3vh;
+    margin-bottom: 70px;
 }
   /* CSS pour les écrans plus larges que 768px (tablettes et ordinateurs) */
   @media screen and (min-width: 1024px) {
@@ -361,6 +448,9 @@ hr{
     .footer h5,
     .footer nav {
         flex: none;
+    }
+    nav ul li a:hover {
+        color: #DCB253; 
     }
     .row {
         display: flex;
