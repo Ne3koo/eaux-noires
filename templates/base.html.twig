@@ -7,14 +7,14 @@
         <title>{% block title %}Chroniques d\'eaux noires{% endblock %}</title>
         <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
         {% block stylesheets %}
-            <link rel="stylesheet" href="/assets/styles/reset.css">
-            <link rel="stylesheet" href="/assets/styles/normalize.css">
-            <link rel="stylesheet" href="/assets/styles/app.css">
+            <link rel="stylesheet" href="{{ asset('styles/reset.css') }}">
+            <link rel="stylesheet" href="{{ asset('styles/normalize.css') }}">
+            <link rel="stylesheet" href="{{ asset('styles/app.css') }}">
         {% endblock %}
 
         {% block javascripts %}
         {# {% block importmap %}{{ importmap('app') }}{% endblock %} #}
-            <script src="/assets/app.js"></script>
+            <script src="{{ asset('app.js') }}"></script>
         {% endblock %}
     </head>
     <body>
@@ -25,15 +25,16 @@
         <div class="navbar" id="admin_panel">
         {% if is_granted('ROLE_ADMIN') %}
             <a href="{{ path('admin') }}">Tableau de bord</a>
-            <a href="#">Menus</a>
+            <a href="{{ ea_admin_url('MenuCrudController') }}">Menus</a>
         {% endif %}
-            <a href="#">Ajouter un article</a>
-            <a href="#">Ajouter une page</a>
+            <a href="{{ ea_admin_url('ArticleCrudController', 'new')}}">Ajouter un article</a>
+            <a href="{{ ea_admin_url('PageCrudController', 'new')}}">Ajouter une page</a>
         </div>
     {% endif %}
         <header class="header">
             <div class="header__logo">
-                <img src="../assets/img/EN logo.png" alt="Logo des Eaux-noires" class="logo_img">
+           
+                <img src=" {{ asset('img/EN_logo.png') }}" alt="Logo des Eaux-noires" class="logo_img">
                 <a href="{{ path('app_home' )}}">
                     <h1><i>Chronique des Eaux Noires</i></h1>
                 </a>

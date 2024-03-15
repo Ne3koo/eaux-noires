@@ -33,6 +33,7 @@ body {
 .logo_img{
     width: 10%;
     height: 25%;
+    background-size: 100%;
 }
 .header__logo{
     width: 100%;
@@ -344,6 +345,7 @@ body {
     background-color: #f8f8f8; /* Example background color */
     padding: 20px;
     box-shadow: rgba(10, 111, 86, 0.2) 0px 7px 29px 0px;
+    margin-bottom: 75px;
 }
 
 /* Widget Styles (Assuming similar styles in the included templates) */
@@ -428,8 +430,51 @@ hr{
     margin-bottom: 70px;
 }
 .row_img img{
-    width: 100%;
+    width: 50%;
+    margin: auto;
+    height: 80%;
+    background-size: 100%;
 }
+.row_img section{
+    margin: auto;
+    align-items: center;
+    text-align: center;
+    width: 48%;
+    height: 100%;
+}
+/* Styles généraux de la pagination */
+.pagination {
+    display: flex;
+    justify-content: center;
+    list-style: none;
+    padding: 0;
+}
+
+.pagination li {
+    margin: 0 5px; /* Espacement entre les éléments */
+}
+
+.pagination a {
+    display: inline-block;
+    padding: 8px 12px;
+    text-decoration: none;
+    color: #333; /* Couleur du texte */
+    border: 1px solid #ccc; /* Bordure autour des liens */
+    border-radius: 20px; /* Coins arrondis pour donner une apparence de bouton */
+    background-color: #fff; /* Couleur de fond */
+    transition: background-color 0.3s, color 0.3s, border-color 0.3s; /* Transition douce pour les changements de couleur */
+}
+
+.pagination a:hover {
+    background-color: #f0f0f0; /* Couleur de fond au survol */
+}
+
+.pagination .active a {
+    background-color: #007bff; /* Couleur de fond de l'élément actif */
+    color: #fff; /* Couleur du texte de l'élément actif */
+    border-color: #007bff; /* Bordure de l'élément actif */
+}
+
   /* CSS pour les écrans plus larges que 768px (tablettes et ordinateurs) */
   @media screen and (min-width: 1024px) {
     .header__nav__close svg {
