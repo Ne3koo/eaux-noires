@@ -8,7 +8,7 @@
             <section class="col-md-8">
                 <h2>{{ category.name }}</h2>
                 <div id="article-list" class="article-container">
-                    {% include 'article/list.html.twig' with { articles: category.articles } %}
+                    {% include 'article/list.html.twig' with { articles: articles } %}
                 </div>
             </section>
         </div>

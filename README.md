@@ -14,14 +14,19 @@
 
 1. Cloner le repository
 
-2. Installer les dépendances Composer
+2. Dupliquer le fichier `.env` et le renommer en `.env.local`
+
+3. Installer les dépendances Composer
 ```bash
 composer install
 ```
 
-3. Dupliquer le fichier `.env` et le renommer en `.env.local`
-
 4. Renseigner la chaîne de connexion à la base de donnée
+
+5. Créer la base de données
+    ```bash
+    php bin/console doctrine:database:create
+    ```
 
 5. Éxécuter les migrations
     ```bash
@@ -34,5 +39,3 @@ composer install
     ```bash
     symfony serve
     ```
-
-2. 

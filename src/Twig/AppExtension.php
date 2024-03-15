@@ -14,7 +14,6 @@ use Doctrine\Common\Collections\Collection;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Router\AdminUrlGenerator;
 use Symfony\Component\Routing\RouterInterface;
-use Symfony\Component\Security\Core\Security;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFilter;
 use Twig\TwigFunction;
@@ -26,26 +25,25 @@ class AppExtension extends AbstractExtension
     public function __construct(
         private RouterInterface $router,
         private AdminUrlGenerator $adminUrlGenerator,
-    )
-    {
-        
+    ) {
+
     }
     
-    public function getFilters(): array
-    {
-        return [
-            new TwigFilter('menuLink', [$this, 'menuLink']),
-            new TwigFilter('categoriesToString', [$this, 'categoriesToString']),
-            new TwigFilter('isCommentAuthor', [$this, 'isCommentAuthor']),
-        ];
-    }
-
     public function getFunctions(): array
     {
         return [
             new TwigFunction('ea_admin_url', [$this, 'getAdminUrl']),
             new TwigFunction('ea_edit', [$this, 'getAdminEditUrl']),
             new TwigFunction('entity_label', [$this, 'getEditCurrentEntityLabel']),
+        ];
+    }
+
+    public function getFilters(): array
+    {
+        return [
+            new TwigFilter('menuLink', [$this, 'menuLink']),
+            new TwigFilter('categoriesToString', [$this, 'categoriesToString']),
+            new TwigFilter('isCommentAuthor', [$this, 'isCommentAuthor']),
         ];
     }
 
@@ -76,10 +74,6 @@ class AppExtension extends AbstractExtension
         if ($category) {
             $name = 'category_show';
             $slug = $category->getSlug();
-        }
-
-        if(!isset($name, $slug)) {
-            return $url;
         }
 
         return $this->router->generate($name, [
