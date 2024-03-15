@@ -6,7 +6,7 @@
 
 - Requires: PHP 8.2.0 or higher
 
-- Requires: MySQL 8.2
+- Requires: Mariadb 11.2.2
 
 - Requires: Composer 2.6
 
