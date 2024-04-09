@@ -44,6 +44,23 @@ class App {
   }
 }
 
+$(document).ready(function() {
+  $('div#comment').submit(function(e) {
+      e.preventDefault();
+      const form = $(this);
+      $.ajax({
+          type: 'POST',
+          url: form.attr('action'),
+          data: form.serialize(),
+          success: function(response) {
+              if (response.success) {
+                  location.reload();
+              }
+          }
+      });
+  });
+});
+
 function openMenuMobile() {
   document.querySelector('.header__nav').classList.add('open');
   document.querySelector('.overlay-menu-mobile').classList.add('open');

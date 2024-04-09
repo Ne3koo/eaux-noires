@@ -21,7 +21,7 @@ class Category
     #[ORM\Column(length: 255)]
     private ?string $slug = null;
 
-    #[ORM\Column(length: 15)]
+    #[ORM\Column(length: 255)]
     private ?string $color = null;
 
     #[ORM\ManyToMany(targetEntity: Article::class, mappedBy: 'categories')]

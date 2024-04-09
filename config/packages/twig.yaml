@@ -2,6 +2,7 @@ twig:
     file_name_pattern: '*.twig'
     globals:
         menu_service: '@App\Service\MenuService'
+        option_service: '@App\Service\OptionService'
 
 when@test:
     twig:

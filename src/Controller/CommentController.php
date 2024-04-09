@@ -30,7 +30,7 @@ class CommentController extends AbstractController
     {
     }
 
-    #[Route('/ajax/comment', name: 'comment_add')]
+    #[Route('/ajax/comment', name: 'comment_add', methods: ['POST'])]
     public function add(Request $request, ArticleRepository $articleRepository, CommentRepository $commentRepository, EntityManagerInterface $em, UserRepository $userRepository): Response
     {
         $commentData = $request->request->all('comment');
@@ -74,9 +74,10 @@ class CommentController extends AbstractController
         return $this->json([
             'code' => 'COMMENT_ADD_SUCCESS',
             'message' => $html,
+            'success' => true,
             'numberOfComments' => $commentRepository->count(['article' => $article])
         ]);
-
+        
         //dd($commentData);
     }
 }
