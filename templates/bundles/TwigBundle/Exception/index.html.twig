@@ -1,0 +1,8 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container">
+        <h1 id="admin_panel">{% block message %}{% endblock %}</h1>
+        <h2 id="admin_panel">{% block description %}{% endblock %}</h2>
+    </div>
+{% endblock %}
