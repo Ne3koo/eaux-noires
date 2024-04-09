@@ -1,4 +1,5 @@
 {% set menus = menu_service.findAll %}
+{% set options = option_service.findAll %}
 
 <!DOCTYPE html>
 <html lang="fr">
@@ -36,12 +37,14 @@
            
                 <img src=" {{ asset('img/EN_logo.png') }}" alt="Logo des Eaux-noires" class="logo_img">
                 <a href="{{ path('app_home' )}}">
-                    <h1><i>Chronique des Eaux Noires</i></h1>
+                    <h1><i>{{ options['blog_title']}}</i></h1>
                 </a>
 
                 <ul class="connexion">
                     {% if not is_granted('IS_AUTHENTICATED_FULLY') %}
+                    {% if '1' == options['users_can_register'] %}
                         <li><a href="{{ path('app_register') }}">S'inscrire</a></li>
+                    {% endif %}
                         <li><a href="{{ path('app_login') }}">Connexion</a></li>
                     
                     {% else %}
@@ -95,7 +98,7 @@
         {% endblock %}
 
         <footer class="footer">
-            <h5>@ {{ 'now' | date('Y') }} Chroniques des Eaux Noires - Tous droits réservés.</h5>
+            <h5>@ {{ 'now' | date('Y') }} {{ options['blog_title']}} - {{ options['blog_copyright']}}</h5>
         
             <nav>
             {% if is_granted('ROLE_AUTHOR') %}

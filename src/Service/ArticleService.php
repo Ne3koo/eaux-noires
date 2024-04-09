@@ -14,7 +14,8 @@ class ArticleService
     (
         private RequestStack $requestStack,
         private ArticleRepository $articleRepository,
-        private PaginatorInterface $paginatorInterface
+        private PaginatorInterface $paginatorInterface,
+        private OptionService $optionService
     )
     {
         
@@ -25,7 +26,7 @@ class ArticleService
         $request = $this->requestStack->getMainRequest();
 
         $page = $request->query->getInt('page', 1);
-        $limit = 2;
+        $limit = $this->optionService->getValue('blog_articles_limit');
 
         $articleQuery = $this->articleRepository->findForPagination($category);
 
