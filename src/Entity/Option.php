@@ -23,10 +23,10 @@ class Option
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $value = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, nullable: true)]
     private ?string $type = null;
 
-    public function __construct(string $label, string $name, string $value, string $type)
+    public function __construct(string $label, string $name, string $value, ?string $type = null)
     {
         $this->label = $label;
         $this->name = $name;

@@ -259,6 +259,16 @@ body {
     padding-top: 20px;
     padding-bottom: 20px;
 }
+.containerInstall {
+    display: flex;
+}
+.containerForm {
+    width: 50%;
+    height: 150%;
+    margin-right: 5px;
+    vertical-align: middle;
+    font-size: 26px;
+}
 
 .col-md-8 {
     flex: 0 0 100%; 
@@ -389,7 +399,12 @@ hr{
     font-family: 'Audiowide', serif;
     padding-right: 30px;
 }
-
+#install h2{
+    color: #DCB253;
+    font-size: 37px;
+    font-family: 'Audiowide', serif;
+    padding-right: 30px;
+}
 .comment {
     margin-bottom: 20px; 
 }
