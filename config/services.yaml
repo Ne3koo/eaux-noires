@@ -6,6 +6,7 @@
 parameters:
     medias_directory: 'public/uploads'
     uploads_directory: 'uploads/'
+    users_can_register: true
 
 services:
     # default configuration for services in *this* file

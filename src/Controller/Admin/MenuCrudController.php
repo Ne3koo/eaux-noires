@@ -25,10 +25,10 @@ class MenuCrudController extends AbstractCrudController
     const MENU_CATEGORIES = 3;
 
     public function __construct(
-        private MenuRepository $menuRepository,
+        private MenuRepository $menuRepo,
         private RequestStack   $requestStack
-    ) {
-        
+    )
+    {
     }
 
     public static function getEntityFqcn(): string
@@ -38,16 +38,15 @@ class MenuCrudController extends AbstractCrudController
 
     public function configureCrud(Crud $crud): Crud
     {
-        
         $subMenuIndex = $this->getSubMenuIndex();
-        //dd($subMenuIndex);
+
         $entityLabelInSingular = 'un menu';
 
         $entityLabelInPlural = match ($subMenuIndex) {
             self::MENU_ARTICLES => 'Articles',
             self::MENU_CATEGORIES => 'Catégories',
             self::MENU_LINKS => 'Liens personnalisés',
-            self::MENU_PAGES => 'Pages',
+            default => 'Pages'
         };
 
         return $crud
@@ -59,7 +58,7 @@ class MenuCrudController extends AbstractCrudController
     {
         $subMenuIndex = $this->getSubMenuIndex();
 
-        return $this->menuRepository->getIndexQueryBuilder($this->getFieldNameFromSubMenuIndex($subMenuIndex));
+        return $this->menuRepo->getIndexQueryBuilder($this->getFieldNameFromSubMenuIndex($subMenuIndex));
     }
 
     public function configureFields(string $pageName): iterable
@@ -80,13 +79,11 @@ class MenuCrudController extends AbstractCrudController
 
     private function getFieldNameFromSubMenuIndex(int $subMenuIndex): string
     {
-        //dd($subMenuIndex);
         return match ($subMenuIndex) {
             self::MENU_ARTICLES => 'article',
             self::MENU_CATEGORIES => 'category',
             self::MENU_LINKS => 'link',
-            self::MENU_PAGES => 'page',
-            default => 'article'
+            default => 'page'
         };
     }
 
@@ -99,14 +96,14 @@ class MenuCrudController extends AbstractCrudController
 
     private function getSubMenuIndex(): int
     {
-        $query = $this->requestStack->getMainRequest()->query;
-        //dd($query->get('subMenuIndex'));
-        if ($referer = $query->get('referrer')) {
-            parse_str(parse_url($referer, PHP_URL_QUERY), $query);
-
-            return $query['subMenuIndex'] ?? 0;
+        $url = $this->requestStack->getMainRequest()->query->all();
+        foreach ($url as $key => $value) {
+            if( 'referrer' === $key){
+                $val = strstr($value, 'submenuIndex');
+                $val = substr($val,13);
+                return $val;
+            }
         }
-
-        return $query->getInt('subMenuIndex');
+        return $this->requestStack->getMainRequest()->query->getInt('submenuIndex');
     }
 }

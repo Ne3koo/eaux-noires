@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Contact{% endblock %}
+
+{% block body %}
+
+    <div class="container">
+        <form method="post">
+        <h1>Contactez-nous</h1>
+            <div class="form_reg">
+
+                {% for label, messages in app.flashes %}
+                    {% for message in messages %}
+                        <div class="alert alert-{{ label }}">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                {% endfor %}
+
+                <div class="contact-form">
+                {{ form_start(formulaire) }}
+        
+                    <div class="form-group">
+                            {{ form_label(formulaire.email) }}
+                            {{ form_widget(formulaire.email) }}
+                            {{ form_errors(formulaire.email) }}
+                    </div>
+
+                    <div class="form-group">
+                        {{ form_label(formulaire.Contenu) }}
+                        {{ form_widget(formulaire.Contenu) }}
+                        {{ form_errors(formulaire.Contenu) }}
+                    </div>
+
+                    <a type="submit" class="comment_submit">{{ form_widget(formulaire.envoyer) }}</a>
+                    <a href="{{ path('app_home') }}" class="comment_submit">Retour à la page d'accueil</a>
+                </div>
+            {{ form_end(formulaire) }}
+            </div>
+        </form>
+    </div>
+    
+{% endblock %}

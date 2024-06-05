@@ -26,7 +26,7 @@ class CommentCrudController extends AbstractCrudController
     public function configureFields(string $pageName): iterable
     {
         return [
-            yield TextareaField::new('title'),
+            yield TextareaField::new('content'),
             yield DateTimeField::new('createdAt'),
             yield AssociationField::new('user')
         ];

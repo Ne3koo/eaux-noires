@@ -9,57 +9,31 @@ class App {
 
   handleCommentForm() {
 
-    const commentForm = document.querySelector('form.comment-form');
-
-    if(null === document.querySelector('form.comment-form')) {
-      return;
-    }
-
-    commentForm.addEventListener('submit', async(e) =>{
-      e.preventDefault();
-      //console.log(e);
-
-      const response = await fetch('/ajax/comment', {
-        method: 'POST',
-        body: new FormData(e.target)
-      });
-
-      if(!response.ok) {
-        return;
-      }
-
-      const json = await response.json;
-
-      console.log(json);
-
-      if(json === 'COMMENT_ADD_SUCCESS') {
-        const commentList = document.querySelector('.comment-list');
-        const commentCount = document.querySelector('#comment-count');
-        const commentContent = document.querySelector('#comment_content');
-        commentList.insertAdjacentHTML('afterbegin', json.message);
-        commentCount.innerText = json.numberOfComments;
-        commentContent.value = '';
-      }
-    })
-  }
-}
-
-$(document).ready(function() {
-  $('div#comment').submit(function(e) {
-      e.preventDefault();
-      const form = $(this);
-      $.ajax({
-          type: 'POST',
-          url: form.attr('action'),
-          data: form.serialize(),
-          success: function(response) {
-              if (response.success) {
-                  location.reload();
-              }
+    document.querySelector('.comment-form').addEventListener('submit', function(event) {
+      event.preventDefault(); 
+      var formData = new FormData(this);
+  
+      fetch('/ajax/comment', {
+          method: 'POST',
+          body: formData,
+      })
+      .then(response => response.json())
+      .then(data => {
+          if (data.success) {
+              document.getElementById('comment-count').textContent = data.numberOfComments;
+              document.getElementById('comment-container').innerHTML += data.message;
+              document.querySelector('.comment-form').reset();
+          } else {
+              console.error('Erreur lors de l\'ajout du commentaire:', data.code);
           }
+      })
+      .catch(error => {
+          console.error('Erreur lors de la requête AJAX:', error);
       });
   });
-});
+  
+  }
+}
 
 function openMenuMobile() {
   document.querySelector('.header__nav').classList.add('open');
