@@ -10,7 +10,7 @@
         {% block stylesheets %}
             <link rel="stylesheet" href="{{ asset('styles/reset.css') }}">
             <link rel="stylesheet" href="{{ asset('styles/normalize.css') }}">
-            <link rel="stylesheet" href="{{ asset('styles/app.css') }}">
+            <link rel="stylesheet" href="{{ asset('styles/app.scss') }}">
         {% endblock %}
 
         {% block javascripts %}
@@ -99,6 +99,12 @@
 
         <footer class="footer">
             <h5>@ {{ 'now' | date('Y') }} {{ options['blog_title']}} - {{ options['blog_copyright']}}</h5>
+
+            <nav>
+                <ul>
+                    <li><a href="{{ path('app_contact') }}">Contact</a></li>
+                </ul>
+            </nav>
         
             <nav>
             {% if is_granted('ROLE_AUTHOR') %}

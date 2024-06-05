@@ -47,15 +47,11 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
         
         if($this->isGranted('ROLE_ADMIN')) {
-            yield MenuItem::subMenu('Menus', 'fas-fa-list')->setSubItems([
-                MenuItem::linkToCrud('Pages', 'fas fa-file', Menu::class)
-                ->setQueryParameter('subMenuIndex', '0'),
-                MenuItem::linkToCrud('Articles', 'fas fa-newspaper', Menu::class)
-                ->setQueryParameter('subMenuIndex', '1'),
-                MenuItem::linkToCrud('Liens personnalisés', 'fas fa-link', Menu::class)
-                ->setQueryParameter('subMenuIndex', '2'),
-                MenuItem::linkToCrud('Catégories', 'fab fa-delicious', Menu::class)
-                ->setQueryParameter('subMenuIndex', '3')
+            yield MenuItem::subMenu('Menus', 'fas fa-list')->setSubItems([
+                MenuItem::linkToCrud('Pages', 'fas fa-file', Menu::class)->setQueryParameter('submenuIndex', 0),
+                MenuItem::linkToCrud('Articles', 'fas fa-newspaper', Menu::class)->setQueryParameter('submenuIndex', 1),
+                MenuItem::linkToCrud('Liens personnalisés', 'fas fa-link', Menu::class)->setQueryParameter('submenuIndex', 2),
+                MenuItem::linkToCrud('Catégories', 'fab fa-delicious', Menu::class)->setQueryParameter('submenuIndex', 3),
             ]);
         }
         if($this->isGranted('ROLE_AUTHOR') or $this->isGranted('ROLE_ADMIN')) {

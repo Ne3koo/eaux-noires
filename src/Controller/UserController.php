@@ -23,27 +23,33 @@ class UserController extends AbstractController
         
     }
 
-    #[Route('/user/register', name: 'app_register')]
+#[Route('/user/register', name: 'app_register')]
     public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $em): Response
     {
-        $userCanRegister = $this->optionService->getValue('users_can_register');
+        $userCanRegister = $this->getParameter('users_can_register'); 
 
-        if(!$userCanRegister) {
+        if (!$userCanRegister) {
             return $this->redirectToRoute('app_home');
         }
-        
-        $user = new User();
 
+        $user = new User();
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $user->setPassword($userPasswordHasher->hashPassword($user, $form->get('plainPassword')->getData()));
-
-            $em->persist($user);
-            $em->flush();
-
-            return $this->redirectToRoute('app_home');
+        if ($form->isSubmitted()) {
+            if ($form->isValid()) {
+                try {
+                    $user->setPassword($userPasswordHasher->hashPassword($user, $form->get('plainPassword')->getData()));
+                    $em->persist($user);
+                    $em->flush();
+                    $this->addFlash('success', 'Compte créé avec succès.');
+                    return $this->redirectToRoute('app_home');
+                } catch (\Exception $e) {
+                    $this->addFlash('error', 'Une erreur s\'est produite lors de la création du compte.');
+                }
+            } else {
+                $this->addFlash('error', 'Le formulaire contient des erreurs.');
+            }
         }
 
         return $this->render('user/register.html.twig', [
@@ -58,9 +64,18 @@ class UserController extends AbstractController
             return $this->redirectToRoute('app_home');
         }
 
+
+        $error = $authenticationUtils->getLastAuthenticationError();
+
+        $lastUsername = $authenticationUtils->getLastUsername();
+
+        if ($error) {
+            $this->addFlash('error', 'Nom d\'utilisateur ou mot de passe incorrect.');
+        }
+
         return $this->render('user/login.html.twig', [
-            'username' => $authenticationUtils->getLastUsername(),
-            'error' => $authenticationUtils->getLastAuthenticationError()
+            'username' => $lastUsername,
+            'error' => $error
         ]);
     }
 
