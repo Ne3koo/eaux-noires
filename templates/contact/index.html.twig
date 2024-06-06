@@ -5,7 +5,7 @@
 {% block body %}
 
     <div class="container">
-        <form method="post">
+
         <h1>Contactez-nous</h1>
             <div class="form_reg">
 
@@ -32,12 +32,12 @@
                         {{ form_errors(formulaire.Contenu) }}
                     </div>
 
-                    <a type="submit" class="comment_submit">{{ form_widget(formulaire.envoyer) }}</a>
+                    {{ form_widget(formulaire.envoyer) }}
                     <a href="{{ path('app_home') }}" class="comment_submit">Retour à la page d'accueil</a>
                 </div>
             {{ form_end(formulaire) }}
             </div>
-        </form>
+
     </div>
     
 {% endblock %}

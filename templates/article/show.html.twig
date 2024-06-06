@@ -4,7 +4,16 @@
 
 {% block body %}
     <div class="container">
-        <h1>{{ article.title }}</h1>
+
+        <div class="row_img">
+            <section>
+                <img src="/uploads/{{ article.featuredImage.filename }}" alt="{{ article.featuredImage.altText }}" loading="lazy" width="180" height="180" >
+            </section>
+
+            <div class="container">
+                <h1 class="article_link">{{ article.title }}</h1>
+            </div>
+        </div>
 
         <hr>
 
