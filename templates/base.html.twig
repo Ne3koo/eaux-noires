@@ -22,16 +22,6 @@
         <div class="overlay-menu-mobile" onclick="closeMenuMobile()">
         </div>
 
-    {% if is_granted('ROLE_AUTHOR') %}
-        <div class="navbar" id="admin_panel">
-        {% if is_granted('ROLE_ADMIN') %}
-            <a href="{{ path('admin') }}">Tableau de bord</a>
-            <a href="{{ ea_admin_url('MenuCrudController') }}">Menus</a>
-        {% endif %}
-            <a href="{{ ea_admin_url('ArticleCrudController', 'new')}}">Ajouter un article</a>
-            <a href="{{ ea_admin_url('PageCrudController', 'new')}}">Ajouter une page</a>
-        </div>
-    {% endif %}
         <header class="header">
             <div class="header__logo">
            
@@ -60,6 +50,16 @@
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
                         </svg>
                     </div>
+
+                    {% if is_granted('ROLE_AUTHOR') %}
+                    <ul class="header__nav__menu">
+                        {% if is_granted('ROLE_ADMIN') %}
+                    <li class="header__nav__menu__link"><a href="{{ path('admin') }}">Tableau de bord</a></li>
+                    {% endif %}
+                    <li class="header__nav__menu__link"><a href="{{ ea_admin_url('ArticleCrudController', 'new')}}">Ajouter un article</a></li>
+                    <li class="header__nav__menu__link"><a href="{{ ea_admin_url('PageCrudController', 'new')}}">Ajouter une page</a></li>
+                    </ul>
+                    {% endif %}
                     
                     {# dropdown à faire #}
                     <ul class="header__nav__menu" id="dropdown">

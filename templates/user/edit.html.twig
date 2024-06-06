@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Éditer le profil{% endblock %}
+
+{% block body %}
+<div class="container">
+    <h1>Éditer le profil</h1>
+
+    {# Afficher les messages flash #}
+    {% for label, messages in app.flashes %}
+        {% for message in messages %}
+            <div class="alert alert-{{ label }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endfor %}
+
+    {{ form_start(form) }}
+    <div class="form-group">
+        {{ form_label(form.username, "Nom d'utilisateur") }}
+        {{ form_widget(form.username, {'attr': {'class': 'form-control'}}) }}
+    </div>
+    <div class="form-group">
+        {{ form_label(form.plainPassword, 'Nouveau mot de passe (laisser vide si inchangé)') }}
+        {{ form_widget(form.plainPassword, {'attr': {'class': 'form-control'}}) }}
+    </div>
+    <button type="submit" class="btn btn-primary">Enregistrer les modifications</button>
+    {{ form_end(form) }}
+
+    <form method="post" action="{{ path('user_delete', {'username': user.username}) }}" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer votre profil ?');">
+        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ user.id) }}">
+        <button class="btn btn-danger mt-3">Supprimer le profil</button>
+    </form>
+</div>
+{% endblock %}

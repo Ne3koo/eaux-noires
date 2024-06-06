@@ -4,6 +4,8 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\RegistrationFormType;
+use App\Controller\UserProfileFormType;
+use App\Form\UserProfileFormType as FormUserProfileFormType;
 use App\Service\OptionService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -91,5 +93,40 @@ class UserController extends AbstractController
         return $this->render('user/index.html.twig', [
             'user' => $user
         ]);
+    }
+    #[Route('/user/{username}/edit', name: 'user_edit')]
+    public function edit(Request $request, User $user, UserPasswordHasherInterface $passwordHasher, EntityManagerInterface $em): Response
+    {
+        $form = $this->createForm(FormUserProfileFormType::class, $user);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            if ($plainPassword = $form->get('plainPassword')->getData()) {
+                $user->setPassword($passwordHasher->hashPassword($user, $plainPassword));
+            }
+
+            $em->flush();
+            $this->addFlash('success', 'Profil mis à jour avec succès.');
+            return $this->redirectToRoute('user', ['username' => $user->getUsername()]);
+        }
+
+        return $this->render('user/edit.html.twig', [
+            'user' => $user,
+            'form' => $form->createView()
+        ]);
+    }
+
+    #[Route('/user/{username}/delete', name: 'user_delete', methods: ['POST'])]
+    public function delete(Request $request, User $user, EntityManagerInterface $em): Response
+    {
+        if ($this->isCsrfTokenValid('delete'.$user->getId(), $request->request->get('_token'))) {
+            $em->remove($user);
+            $em->flush();
+            $this->addFlash('success', 'Profil supprimé avec succès.');
+        } else {
+            $this->addFlash('error', 'Erreur lors de la suppression du profil.');
+        }
+
+        return $this->redirectToRoute('app_home');
     }
 }
