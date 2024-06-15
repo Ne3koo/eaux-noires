@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier l'article - {{ article.title }}{% endblock %}
+
+{% block body %}
+    <div class="edit">
+        <h2>Modifier l'article</h2>
+
+        {{ form_start(articleForm) }}
+            {{ form_row(articleForm.title) }}
+            {{ form_row(articleForm.content, {'value': article.content|striptags}) }}
+            {{ form_row(articleForm.featuredText) }}
+            {{ form_row(articleForm.link) }}
+            {{ form_row(articleForm.categories) }}
+            <button type="submit" class="btn btn-primary">{{ button_label|default('Enregistrer les modifications') }}</button>
+        {{ form_end(articleForm) }}
+    </div>
+{% endblock %}

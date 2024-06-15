@@ -4,7 +4,7 @@
 
 {% block body %}
 
-    <div class="container">
+    <div class="login">
         <form method="post">
             {# {% if error %}
                 <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
@@ -24,7 +24,7 @@
                 </div>
             {% endif %}
 
-            <h1 class="h3 mb-3 font-weight-normal">Se connecter</h1>
+            <h2 class="h3 mb-3 font-weight-normal">Se connecter</h2>
 
             <div class="form-group">
                 <label for="inputUsername">Nom d'utilisateur</label>
@@ -38,7 +38,7 @@
 
             <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
 
-            <button class="comment_submit" type="submit">
+            <button class="" type="submit">
                 Se connecter
             </button>
         </form>

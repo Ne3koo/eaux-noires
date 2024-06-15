@@ -4,9 +4,9 @@
 
 {% block body %}
 
-    <div class="container">
+    <div class="contact">
 
-        <h1>Contactez-nous</h1>
+        <h2>Contactez-nous</h2>
             <div class="form_reg">
 
                 {% for label, messages in app.flashes %}
@@ -33,7 +33,7 @@
                     </div>
 
                     {{ form_widget(formulaire.envoyer) }}
-                    <a href="{{ path('app_home') }}" class="comment_submit">Retour à la page d'accueil</a>
+                    <a href="{{ path('app_home') }}" class="">Retour à la page d'accueil</a>
                 </div>
             {{ form_end(formulaire) }}
             </div>

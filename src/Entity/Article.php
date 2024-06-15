@@ -8,6 +8,8 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 #[ORM\Entity(repositoryClass: ArticleRepository::class)]
 class Article implements TimeStampedInterface
@@ -43,6 +45,13 @@ class Article implements TimeStampedInterface
 
     #[ORM\ManyToOne]
     private ?Media $featuredImage = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    #[Assert\Url(
+        protocols: ['https'],
+        message: 'The URL must be a valid HTTPS URL.'
+    )]
+    private ?string $link = null;
 
     public function __construct()
     {
@@ -199,5 +208,17 @@ class Article implements TimeStampedInterface
     public function __toString()
     {
         return $this->title;
+    }
+
+    public function getLink(): ?string
+    {
+        return $this->link;
+    }
+
+    public function setLink(?string $link): static
+    {
+        $this->link = $link;
+
+        return $this;
     }
 }

@@ -3,8 +3,8 @@
 {% block title %}S'inscrire{% endblock %}
 
 {% block body %}
-<div class="container">
-    <h1>S'inscrire</h1>
+<div class="register">
+    <h2>S'inscrire</h2>
 
     {# Afficher les messages flash #}
     {% for label, messages in app.flashes %}
@@ -25,16 +25,18 @@
             {{ form_errors(registrationForm.username) }}
         </div>
 
-        <div class="form-group">
-            {{ form_label(registrationForm.plainPassword.first, 'Mot de passe', {'label_attr': {'for': 'plainPassword'}}) }}
-            {{ form_widget(registrationForm.plainPassword.first, {'attr': {'class': 'form-control', 'placeholder': 'Mot de passe'}}) }}
-            {{ form_errors(registrationForm.plainPassword.first) }}
-        </div>
+        <div class="password">
+            <div class="form-group">
+                {{ form_label(registrationForm.plainPassword.first, 'Mot de passe', {'label_attr': {'for': 'plainPassword'}}) }}
+                {{ form_widget(registrationForm.plainPassword.first, {'attr': {'class': 'form-control', 'placeholder': 'Mot de passe'}}) }}
+                {{ form_errors(registrationForm.plainPassword.first) }}
+            </div>
 
-        <div class="form-group">
-            {{ form_label(registrationForm.plainPassword.second, 'Confirmer le mot de passe', {'label_attr': {'for': 'plainPasswordConfirm'}}) }}
-            {{ form_widget(registrationForm.plainPassword.second, {'attr': {'class': 'form-control', 'placeholder': 'Confirmer le mot de passe'}}) }}
-            {{ form_errors(registrationForm.plainPassword.second) }}
+            <div class="form-group">
+                {{ form_label(registrationForm.plainPassword.second, 'Confirmer le mot de passe', {'label_attr': {'for': 'plainPasswordConfirm'}}) }}
+                {{ form_widget(registrationForm.plainPassword.second, {'attr': {'class': 'form-control', 'placeholder': 'Confirmer le mot de passe'}}) }}
+                {{ form_errors(registrationForm.plainPassword.second) }}
+            </div>
         </div>
 
         <div class="form-group form-check">
@@ -43,7 +45,7 @@
             {{ form_errors(registrationForm.agreeTerms) }}
         </div>
 
-        <button type="submit" class="comment_submit">S'inscrire</button>
+        <button type="submit" class="">S'inscrire</button>
 
         {{ form_end(registrationForm) }}
     </div>

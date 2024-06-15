@@ -25,7 +25,7 @@ class UserController extends AbstractController
         
     }
 
-#[Route('/user/register', name: 'app_register')]
+    #[Route('/register', name: 'app_register')]
     public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $em): Response
     {
         $userCanRegister = $this->getParameter('users_can_register'); 
@@ -38,20 +38,19 @@ class UserController extends AbstractController
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted()) {
-            if ($form->isValid()) {
-                try {
-                    $user->setPassword($userPasswordHasher->hashPassword($user, $form->get('plainPassword')->getData()));
-                    $em->persist($user);
-                    $em->flush();
-                    $this->addFlash('success', 'Compte créé avec succès.');
-                    return $this->redirectToRoute('app_home');
-                } catch (\Exception $e) {
-                    $this->addFlash('error', 'Une erreur s\'est produite lors de la création du compte.');
-                }
-            } else {
-                $this->addFlash('error', 'Le formulaire contient des erreurs.');
+        if ($form->isSubmitted() && $form->isValid()) {
+            try {
+                $user->setPassword($userPasswordHasher->hashPassword($user, $form->get('plainPassword')->getData()));
+                $em->persist($user);
+                $em->flush();
+
+                return $this->redirectToRoute('app_register');
+                $this->addFlash('success', 'Compte créé avec succès.');
+            } catch (\Exception $e) {
+                $this->addFlash('error', 'Une erreur s\'est produite lors de la création du compte.');
             }
+        } elseif ($form->isSubmitted() && !$form->isValid()) {
+            $this->addFlash('', 'Le formulaire contient des erreurs.');
         }
 
         return $this->render('user/register.html.twig', [
@@ -59,7 +58,8 @@ class UserController extends AbstractController
         ]);
     }
 
-    #[Route('/user/login', name: 'app_login')]
+
+    #[Route('/login', name: 'app_login')]
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
         if ($this->isGranted('IS_AUTHENTICATED_FULLY')) {
@@ -81,7 +81,7 @@ class UserController extends AbstractController
         ]);
     }
 
-    #[Route('/user/logout', name: 'app_logout', methods: ['GET'])]
+    #[Route('/logout', name: 'app_logout', methods: ['GET'])]
     public function logout()
     {
         throw new \Exception('Don\'t forget to activate logout in security.yaml');
@@ -107,7 +107,7 @@ class UserController extends AbstractController
 
             $em->flush();
             $this->addFlash('success', 'Profil mis à jour avec succès.');
-            return $this->redirectToRoute('user', ['username' => $user->getUsername()]);
+            // return $this->redirectToRoute('user', ['username' => $user->getUsername()]);
         }
 
         return $this->render('user/edit.html.twig', [
