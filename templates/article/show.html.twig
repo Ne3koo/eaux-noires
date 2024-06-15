@@ -3,15 +3,26 @@
 {% block title %}{{ article.title }}{% endblock %}
 
 {% block body %}
-    <div class="container">
+    <div class="article_vue">
+        {% if is_granted('ROLE_AUTHOR') %}
+        <div class="button_admin">
+            <a href="{{ path('article_edit', { 'slug': article.slug }) }}"><button>Modifier l'article</button></a>
+            {% if is_granted('ROLE_ADMIN') %}
+                <form method="POST" action="{{ path('article_delete', {'slug': article.slug}) }}" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer cet article ?');">
+                    <input type="hidden" name="token" value="{{ csrf_token('delete-article' ~ article.id) }}">
+                    <button type="submit" class="btn btn-danger">Supprimer l'article</button>
+                </form>
+            {% endif %}
+        </div>
+        {% endif %}
 
         <div class="row_img">
-            <section>
+            <div>
                 <img src="/uploads/{{ article.featuredImage.filename }}" alt="{{ article.featuredImage.altText }}" loading="lazy" width="180" height="180" >
-            </section>
+            </div>
 
-            <div class="container">
-                <h1 class="article_link">{{ article.title }}</h1>
+            <div class="">
+                <h2 class="article_link">{{ article.title }}</h2>
             </div>
         </div>
 
@@ -20,11 +31,17 @@
         {{ article.content|raw }}
 
         <hr>
+
+        <div class="button-container">
+            <a href="{{ path('app_home') }}"><button>Retour à l'accueil</button></a>
+        </div>
         
-        <section class="comments_zone">
+        <div class="comments_zone">
             
             {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-            {{ form(commentForm, { 'attr': {'class': 'comment-form' } }) }}
+            {{ form_start(commentForm, { 'attr': { 'class': 'comment-form' } }) }}
+            {{ form_widget(commentForm) }}
+            {{ form_end(commentForm) }}
             {% endif %}
 
             <h2>
@@ -37,6 +54,6 @@
                 {% endfor %}
             </div>
 
-        </section>
+        </div>
     </div>
 {% endblock %}

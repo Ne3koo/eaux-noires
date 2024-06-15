@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des articles{% endblock %}
+
+{% block body %}
+
+    <div class="list">
+        <div id="install">
+            <h2>Liste de nos articles</h2>
+        </div>
+        <div class="col-md-8">
+            <div id="article-list" class="article-container">
+                <ul>
+                {% for article in articles %}
+                    <li>{% include 'article/list.html.twig' with { articles } %}</li>
+                {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="">
+    <div class="">
+        {{ knp_pagination_render(articles) }}
+    </div>
+    </div>
+
+{% endblock %}

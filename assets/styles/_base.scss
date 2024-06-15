@@ -1,0 +1,35 @@
+/* Base styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: $font-family-secondary;
+    color: $text-color;
+    font-size: 24px;
+    line-height: 1.6;
+}
+
+a{
+    text-decoration: none;
+    color: $text-color;
+    transition: color 0.3s ease;
+
+    &:hover {
+        color: $secondary-color;
+    }
+}
+h1, h2, h3, h4, h5, h6 {
+    font-family: $font-family-main;
+}
+li {
+    list-style: none;
+}
+.alert {
+    color: $alert;
+}
+.success {
+    color: $success;
+}

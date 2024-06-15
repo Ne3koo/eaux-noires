@@ -5,16 +5,19 @@
 <html lang="fr">
     <head>
         <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>{% block title %}Chroniques d\'eaux noires{% endblock %}</title>
-        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
+        
         {% block stylesheets %}
+            {{ encore_entry_link_tags('app') }}
             <link rel="stylesheet" href="{{ asset('styles/reset.css') }}">
             <link rel="stylesheet" href="{{ asset('styles/normalize.css') }}">
-            <link rel="stylesheet" href="{{ asset('styles/app.scss') }}">
+            <link rel="stylesheet" href="{{ asset('styles/app.min.css') }}">
         {% endblock %}
 
         {% block javascripts %}
-        {# {% block importmap %}{{ importmap('app') }}{% endblock %} #}
+            {{ encore_entry_script_tags('app') }}
+        {% block importmap %}{{ importmap('app') }}{% endblock %}
             <script src="{{ asset('app.js') }}"></script>
         {% endblock %}
     </head>
@@ -51,16 +54,27 @@
                         </svg>
                     </div>
                     
-                    {% if is_granted('ROLE_AUTHOR') %}
+
                     <ul class="header__nav__menu">
-                        {% if is_granted('ROLE_ADMIN') %}
-                        <li class="header__nav__menu__link"><a href="{{ path('admin') }}">Tableau de bord</a></li>
+                        <div class="hide_on_dekstop">
+                        {% if not is_granted('IS_AUTHENTICATED_FULLY') %}
+                        {% if '1' == options['users_can_register'] %}
+                            <li class="header__nav__menu__link"><a href="{{ path('app_register') }}">S'inscrire</a></li>
                         {% endif %}
-                        <li class="header__nav__menu__link"><a href="{{ ea_admin_url('ArticleCrudController', 'new')}}">Ajouter un article</a></li>
-                        <li class="header__nav__menu__link"><a href="{{ ea_admin_url('PageCrudController', 'new')}}">Ajouter une page</a></li>
+                            <li class="header__nav__menu__link"><a href="{{ path('app_login') }}">Connexion</a></li>
+                        
+                        {% else %}
+                            <li class="header__nav__menu__link"><a href="{{ path('user', { 'username': app.user.username }) }}">{{ app.user.username|capitalize }}</a></li>
+                            <li class="header__nav__menu__link"><a href="{{ path('app_logout') }}">Déconnexion</a></li>
+                        {% endif %}
+                        </div>
+                        {% if is_granted('ROLE_AUTHOR') %}
+                        <li class="header__nav__menu__link"><a href="{{ path('admin') }}">Tableau de bord</a></li>
+                        <li class="header__nav__menu__link"><a href="{{ path('article_new') }}">Créer ton article</a></li>
+                        {% endif %}
+                        <li class="header__nav__menu__link"><a href="{{ path('articles') }}">Liste des articles</a></li>
                     </ul>
-                    {% endif %}
-                    
+
                     {# dropdown à faire #}
                     <ul class="header__nav__menu" id="dropdown">
                         {% for menu in menus %}
@@ -103,20 +117,19 @@
             <nav>
                 <ul>
                     <li><a href="{{ path('app_contact') }}">Contact</a></li>
+                    <li><a href="{{ path('app_home') }}">Accueil</a></li>
                 </ul>
             </nav>
         
             <nav>
-            {% if is_granted('ROLE_AUTHOR') %}
                 <ul>
-                {% if is_granted('ROLE_ADMIN') %}
-                    <li><a href="{{ path('admin') }}">Tableau de bord</a></li>
-                    <li><a href="#">Menus</a></li>
-                {% endif %}
-                    <li><a href="#">Ajouter</a></li>
-                    <li><a href="#">Ajouter une page</a></li>
-                {% endif %}
-                    
+                    {% if is_granted('ROLE_AUTHOR') %}
+                        {% if is_granted('ROLE_ADMIN') %}
+                            <li><a href="{{ path('admin') }}">Tableau de bord</a></li>
+                        {% endif %}
+                        <li><a href="{{ path('article_new') }}">Créer ton article</a></li>
+                    {% endif %}
+                    <li><a href="{{ path('articles') }}">Liste des articles</a></li>
                 </ul>
             </nav>
         

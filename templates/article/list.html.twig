@@ -1,9 +1,9 @@
-{% for article in articles %}
+{% for article in articles|slice(0, 3) %}
     {% include 'article/item.html.twig' with { article } %}
 {% endfor %}
 
 <div class="container">
-    <section class="">
+    <div class="">
         {{ knp_pagination_render(articles) }}
-    </section>
+    </div>
 </div>

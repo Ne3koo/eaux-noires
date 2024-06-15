@@ -1,0 +1,47 @@
+/* Footer styles */
+footer {
+    background-color: $primary-color;
+    color: $secondary-color;
+    box-shadow: rgba(10, 111, 86, 0.2) 0px 7px 29px 0px;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+  }
+footer a{
+    color: $navbar-color;
+}
+footer h5{
+    font-size: 24px;
+
+    line-height: 20px;
+}
+    nav {
+        @include flex-column-center;
+        ul {
+            li a {
+                text-align: left;
+                margin-bottom: 25px;
+            }
+        }
+    }
+
+    @media screen and (min-width: 1024px) {
+        footer {
+            @include container;
+            border-radius: 20px;
+            width: 80%;
+            margin: auto; 
+            margin-bottom: 30px;
+            margin-top: 150px;
+            padding: 0px 20px; 
+        }
+        footer h5{
+            font-size: 24px;
+            padding-left: 20px;
+            line-height: 100%;
+            margin-top: 50px;
+            margin-bottom: 50px;
+        }
+    }

@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Créer un nouvel Article{% endblock %}
+
+{% block body %}
+    <div class="edit">
+        <h2>Créer un nouvel Article</h2>
+        {{ form_start(articleForm) }}
+        {{ form_widget(articleForm) }}
+        <button class="btn">Enregistrer l'article</button>
+        {{ form_end(articleForm) }}
+    </div>
+{% endblock %}
+

@@ -26,7 +26,6 @@ class UserProfileFormType extends AbstractType
             ])
             ->add('save', SubmitType::class, [
                 'label' => 'Enregistrer les modifications',
-                'attr' => ['class' => 'btn btn-primary']
             ])
         ;
     }

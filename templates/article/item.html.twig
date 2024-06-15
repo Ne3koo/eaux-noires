@@ -1,24 +1,27 @@
 {% set article_show = path('article_show', {'slug':article.slug }) %}
 <article>
     <div class="row_img">
-        <section>
+        <div>
             {% if article.featuredImage %}
                 <a href="{{ path('article_show', { 'slug': article.slug }) }}">
                     <img src="/uploads/{{ article.featuredImage.filename }}" alt="{{ article.featuredImage.altText }}" loading="lazy" width="350" height="205" >
                 </a>
             {% endif %}
-        </section>
+        </div>
 
-        <div class="container">
+        <div class="">
             <h2>
                 <a href="{{ path('article_show', { 'slug': article.slug }) }}" class="article_link">{{ article.title }}</a>
             </h2>
             <p>
                 {{ article.createdAt|date('d M Y') }}
             </p>
-            {{ article.featuredText ?: article.content|striptags|slice(0, 130) ~ '...'}}
+            {{ article.featuredText ?: article.content|striptags|slice(0, 90) ~ '...'}}
         </div>
+    </div>
 
+    <div class="button-container">
+        <a href="{{ path('article_show', { 'slug': article.slug }) }}"><button class="button read-more">Lire la suite</button></a>
     </div>
 
     <hr>

@@ -1,1 +1,30 @@
-{}
+{
+  "name": "eaux-noires",
+  "description": "(DESC PROJECT)\r - Symfony v7.03\r ## PRÉREQUIS D'INSTALLATIONS",
+  "version": "1.0.0",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.24.7",
+    "@babel/preset-env": "^7.24.7",
+    "@symfony/webpack-encore": "^4.6.1",
+    "core-js": "^3.37.1",
+    "cssnano": "^7.0.2",
+    "node-sass": "^9.0.0",
+    "postcss-cli": "^11.0.0",
+    "postcss-loader": "^7.3.4",
+    "sass": "^1.77.5",
+    "sass-loader": "^14.2.1",
+    "webpack-notifier": "^1.15.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "encore dev",
+    "build": "encore production"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

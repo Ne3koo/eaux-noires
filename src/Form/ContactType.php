@@ -32,9 +32,6 @@ class ContactType extends AbstractType
             ])
             ->add('envoyer', SubmitType::class, [
                 'label' => 'Envoyer',
-                'attr' => [
-                    'class' => 'comment_submit'
-                ]
             ])
         ;
     }
