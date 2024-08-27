@@ -18,7 +18,11 @@
 
         <div class="row_img">
             <div>
-                <img src="/uploads/{{ article.featuredImage.filename }}" alt="{{ article.featuredImage.altText }}" loading="lazy" width="180" height="180" >
+                {% if article.featuredImage %}
+                    <img src="/uploads/{{ article.featuredImage.filename }}" alt="{{ article.featuredImage.altText }}" loading="lazy" width="180" height="180">
+                {% else %}
+                    <p>Aucune image disponible</p>
+                {% endif %}
             </div>
 
             <div class="">
@@ -50,7 +54,7 @@
 
             <div class="comment-list">
                 {% for comment in comments %}
-                {% include 'comment/index.html.twig' with [comment] %}
+                {% include 'comment/index.html.twig' with { 'comment': comment } %}
                 {% endfor %}
             </div>
 

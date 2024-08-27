@@ -52,31 +52,38 @@ class ArticleController extends AbstractController
         $article = new Article();
         $form = $this->createForm(ArticleType::class, $article);
         $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            if (!$article->getSlug()) {
-                $slug = $slugger->slug($article->getTitle())->lower();
-                $article->setSlug($slug);
+    
+        if ($form->isSubmitted()) {
+            if ($form->isValid()) {
+                if (!$article->getSlug()) {
+                    $slug = $slugger->slug($article->getTitle())->lower();
+                    $article->setSlug($slug);
+                }
+    
+                if (!$article->getCreatedAt()) {
+                    $article->setCreatedAt(new \DateTime());
+                }
+                $article->setUpdatedAt(new \DateTime());
+    
+                try {
+                    $entityManager = $mr->getManager();
+                    $entityManager->persist($article);
+                    $entityManager->flush();
+                    
+                    return $this->redirectToRoute('article_show', ['slug' => $article->getSlug()]);
+                } catch (\Exception $e) {
+                    $this->addFlash('error', 'Une erreur est survenue : ' . $e->getMessage());
+                }
+            } else {
+                dump($form->getErrors(true, false));
             }
-
-            // Set createdAt and updatedAt if not already set
-            if (!$article->getCreatedAt()) {
-                $article->setCreatedAt(new \DateTime());
-            }
-            $article->setUpdatedAt(new \DateTime());
-
-            $entityManager = $mr->getManager();
-            $entityManager->persist($article);
-            $entityManager->flush();
-
-            return $this->redirectToRoute('article_show', ['slug' => $article->getSlug()]);
         }
-
+    
         return $this->render('article/new.html.twig', [
             'articleForm' => $form->createView(),
         ]);
     }
-
+    
     #[Route('/article/{slug}/edit', name: 'article_edit')]
     public function edit(Request $request, ?Article $article, ManagerRegistry $mr): Response
     {

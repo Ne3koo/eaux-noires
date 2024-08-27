@@ -5,10 +5,18 @@
 {% block body %}
     <div class="edit">
         <h2>Créer un nouvel Article</h2>
-        {{ form_start(articleForm) }}
+        {{ form_start(articleForm, { 'attr': { 'class': 'article-form' } }) }}
+
+        {% if form_errors(articleForm) %}
+            <div class="form-errors">
+                {{ form_errors(articleForm) }}
+            </div>
+        {% endif %}
+
         {{ form_widget(articleForm) }}
-        <button class="btn">Enregistrer l'article</button>
+        
+        <button type="submit" class="btn">Enregistrer l'article</button>
+        
         {{ form_end(articleForm) }}
     </div>
 {% endblock %}
-
