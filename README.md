@@ -21,6 +21,13 @@
 composer install
 ```
 
+3.1 Installer les dépendances NPM
+```bash
+npm install
+
+npm install @symfony/webpack-encore 
+```
+
 4. Renseigner la chaîne de connexion à la base de donnée
 
 5. Créer la base de données
